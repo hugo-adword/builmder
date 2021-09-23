@@ -1,8 +1,7 @@
 FROM ubuntu:focal
+
 LABEL maintainer="hugo-adword <00.hugo.ad@gmail.com>"
 ENV DEBIAN_FRONTEND noninteractive
-
-WORKDIR /tmp
 
 RUN apt-get -yqq update \
     && apt-get install -y apt-utils \
@@ -26,8 +25,6 @@ RUN curl --create-dirs -L -o /usr/local/bin/repo -O -L https://storage.googleapi
     && chmod a+rx /usr/local/bin/repo
 
 RUN  ln -snf /usr/share/zoneinfo/Asia/Kolkata /etc/localtime
-
-
 VOLUME ["/tmp/ccache", "/tmp/rom"]
 ENTRYPOINT ["/bin/bash"]
 
