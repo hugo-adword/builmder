@@ -1,0 +1,34 @@
+#!/bin/bash
+cd /tmp/rom
+
+curl https://gist.githubusercontent.com/SuperCosmicBeing/c6db35d8abfa480e183a66b71ffca563/raw/3f5f1fc6d02ae767479bda37c04ea417a229f7eb/gms_full.mk >> gms_full.mk
+mv gms_full.mk vendor/gms/
+rm -rf device/generic/opengl-transport
+
+# Normal build steps
+. build/envsetup.sh
+lunch derp_vince-user
+export CCACHE_DIR=/tmp/ccache
+export CCACHE_EXEC=$(which ccache)
+export USE_CCACHE=1
+ccache -M 20G 
+ccache -o compression=true 
+ccache -z
+
+# Telegram send message helper method
+tg(){
+	bot_api=$bot_api 
+	your_telegram_id=$1 
+	msg=$2
+	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
+}
+id=-1001273969756
+tg $id "DerpFest Compile Status: STARTED!.
+Started at:- $(date)."
+
+mka derp -j8 &
+sleep 95m
+kill %1
+ccache -s
+
+#mka derp -j8

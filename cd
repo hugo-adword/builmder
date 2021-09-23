@@ -7,19 +7,9 @@ cat /etc/os*
 env
 
 url=https://ancient-bush-fa07.010-hugo-ad.workers.dev/ccache/ccache.tar.gz 
-
 cd /tmp 
 time aria2c $url -x16 -s50 
 time tar xf ccache.tar.gz  
 rm -rf ccache.tar.gz
 
 export CCACHE_DIR=/tmp/ccache
-sleep 2m 
-
-while : 
-do
-ccache -s
-echo ''
-top -b -i -n 1
-sleep 1m
-done

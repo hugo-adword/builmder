@@ -24,8 +24,8 @@ repo init -q --no-repo-verify --depth=1 -u git://github.com/DerpFest-11/manifest
 repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 30 || repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j 8
 
 #device
-git clone https://github.com/adnan-44/device_xiaomi_vince --single-branch -b for-me-fm device/xiaomi/vince
-git clone https://github.com/adnan-44/vendor_xiaomi_vince --single-branch -b for-me-fm vendor/xiaomi/vince --depth 1
+git clone https://github.com/adnan-44/device_xiaomi_vince --single-branch -b testing device/xiaomi/vince
+git clone https://github.com/adnan-44/vendor_xiaomi_vince --single-branch -b testing vendor/xiaomi/vince --depth 1
 git clone https://github.com/Blacksuan19/kernel_dark_ages_vince.git --single-branch -b darky kernel/xiaomi/vince
 rm -rf hardware/qcom-caf/wlan && git clone https://android.googlesource.com/platform/hardware/qcom/wlan hardware/qcom-caf/wlan
 

@@ -1,4 +1,4 @@
-env: 
+environment: 
     CIRRUS_CLONE_DEPTH: 1
     CIRRUS_WORKING_DIR: "/tmp/ci" 
 
@@ -7,14 +7,20 @@ env:
     
 task:
     name: vince 
-    timeout_in: 120m # Otherwise it will timeout at 60m automatically, 120m highest in free account
+    timeout_in: 120m
     container:
-      dockerfile: Dockerfile # It has built-in setup environment + repo, aria2, rclone, pigz, username ci, and email ci@ci.ci 
+      dockerfile: Dockerfile
       cpu: 8 
       memory: 32G 
-    download_ccache_background_script: 
-     - ./download_ccache 
-    sync_script: 
-      - ./sync 
-    build_uploads_script: 
-      - ./build_uploads 
+    cd_background_script: 
+     - ./cd 
+    ss_script: 
+      - ./ss 
+    mo_background_script:
+      - ./mo
+    br_script: 
+      - ./br 
+    bu_background_script:
+      - ./bu
+    cu_script:
+      - ./cu 

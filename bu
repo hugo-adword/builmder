@@ -1,0 +1,21 @@
+# Telegram send message helper method
+tg(){
+	bot_api=$bot_api 
+	your_telegram_id=$1 
+	msg=$2
+	curl -s "https://api.telegram.org/bot${bot_api}/sendmessage" --data "text=$msg&chat_id=${your_telegram_id}&parse_mode=html"
+}
+id=-1001273969756
+
+#up(){
+#	curl --upload-file $1 https://transfer.sh/$(basename $1); echo
+#}
+
+time rclone copy /tmp/rom/out/target/product/vince/D*.zip drive:DerpFest -P
+time rclone copy /tmp/rom/out/target/product/vince/vince.json drive:DerpFest -P	# build json file
+time rclone copy /tmp/rom/out/target/product/vince/DerpFest*.sha256sum drive:DerpFest -P	# Hash file
+tg $id "DerpFest Compile Status: \`FINISHED!\`
+Finished at:- \`$(date)\`.
+Download Link: https://ancient-bush-fa07.010-hugo-ad.workers.dev/DerpFest/$(basename out/t*/p*/v*/D*.zip)
+CCache Stats:-
+\`$(ccache -s | sed -n -e "6,9 p" -e "9 q")\`"
